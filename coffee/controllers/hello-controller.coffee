@@ -7,7 +7,9 @@ define [
 
   class HelloController extends Controller
     show: (params) ->
+      ###
       @model = new HelloWorld()
       @view = new HelloWorldView
         model: @model
         region: 'main'
+      ###

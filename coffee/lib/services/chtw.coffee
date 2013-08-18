@@ -2,7 +2,7 @@ define [
   'config'
   'lib/services/service-provider'
   'models/user'
-],(Config, ServiceProvider, User)
+],(Config, ServiceProvider, User)->
 
   'use strict'
 

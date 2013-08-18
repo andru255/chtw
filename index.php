@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <?php 
+  <?php
 	 $host = "http://local.chtw.pe"
   ?>
   <meta charset="utf-8">
@@ -46,6 +46,7 @@
   require(['application', 'routes'], function(Application, routes) {
     new Application({routes: routes, controllerSuffix: '-controller'});
   });
+
   </script>
 </head>
 <body></body>
