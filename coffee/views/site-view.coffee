@@ -8,6 +8,6 @@ define [
     container: 'body'
     id: 'site-container'
     regions:
-      main: '#main-container'
+      main: '#content-container'
     template: template
     template = null

@@ -18,7 +18,7 @@ define(['views/base/view', 'text!templates/site.hbs'], function(View, template) 
     SiteView.prototype.id = 'site-container';
 
     SiteView.prototype.regions = {
-      main: '#main-container'
+      main: '#content-container'
     };
 
     SiteView.prototype.template = template;

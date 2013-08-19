@@ -13,10 +13,18 @@ define(['chaplin', 'views/site-view', 'views/header-view'], function(Chaplin, Si
       return _ref;
     }
 
-    Controller.prototype.beforeAction = function() {
+    Controller.prototype.beforeAction = function(params, route) {
       this.compose('site', SiteView);
       return this.compose('header', HeaderView);
     };
+
+    /*
+    if route.name in ['users#show', 'repos#show', 'topics#show']
+      @compose 'navigation', ->
+      @model = new Navigation
+      @view = new NavigationView {@model}
+    */
+
 
     return Controller;
 

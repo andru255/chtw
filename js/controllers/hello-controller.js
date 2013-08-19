@@ -2,7 +2,7 @@
 var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-define(['controllers/base/controller', 'models/hello-world', 'views/hello-world-view'], function(Controller, HelloWorld, HelloWorldView) {
+define(['controllers/base/controller', 'models/photos', 'views/hello-world-view'], function(Controller, Photos, HelloWorldView) {
   'use strict';
   var HelloController, _ref;
   return HelloController = (function(_super) {
@@ -14,13 +14,20 @@ define(['controllers/base/controller', 'models/hello-world', 'views/hello-world-
     }
 
     HelloController.prototype.show = function(params) {
-      /*
-      @model = new HelloWorld()
-      @view = new HelloWorldView
-        model: @model
+      var fetch;
+      this.model = new Photos();
+      this.view = new HelloWorldView({
+        containerMethod: 'html',
+        model: this.model,
         region: 'main'
-      */
-
+      });
+      fetch = this.model.fetch();
+      return fetch.error(function(e) {
+        return console.log(arguments);
+      }).then(function(data) {
+        console.log("Wuju! exitoso!");
+        return console.log(data.stat);
+      }).always(function() {});
     };
 
     return HelloController;
