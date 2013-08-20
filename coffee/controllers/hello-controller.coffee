@@ -32,6 +32,10 @@ define [
       #)
       ###
 
+      ###
+        http://dailyjs.com/2012/12/27/backbone-tutorial-5/
+
+      ###
       #@photos = new Collection null, model: Photo
       #@photos.url = @model.url()
       #@photosView = new
