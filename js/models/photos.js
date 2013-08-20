@@ -4,22 +4,26 @@ var __hasProp = {}.hasOwnProperty,
 
 define(['chaplin', 'models/base/model'], function(Chaplin, Model) {
   'use strict';
-  var PhotosModel, _ref;
-  return PhotosModel = (function(_super) {
-    __extends(PhotosModel, _super);
+  var Photos, _ref;
+  return Photos = (function(_super) {
+    __extends(Photos, _super);
 
-    function PhotosModel() {
-      _ref = PhotosModel.__super__.constructor.apply(this, arguments);
+    function Photos() {
+      _ref = Photos.__super__.constructor.apply(this, arguments);
       return _ref;
     }
 
-    PhotosModel.prototype.urlRoot = "http://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=afbc4a16eae358578189479ffae8c063&photo_id=cat&format=json&nojsoncallback=1&api_sig=65a41067f4e207282d023619e6a015a";
+    Photos.prototype.urlRoot = "http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=100fdf7552196490a96bea6ae20d6096&tags=cat&format=json&nojsoncallback=1&api_sig=1ccc53d1cbea10e25098ad252502990c";
 
-    PhotosModel.prototype.defaults = {
+    Photos.prototype.defaults = {
       message: 'ey!'
     };
 
-    return PhotosModel;
+    Photos.prototype.parse = function(response) {
+      return response.photo;
+    };
+
+    return Photos;
 
   })(Model);
 });

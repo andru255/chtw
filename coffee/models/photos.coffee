@@ -4,8 +4,12 @@ define [
 ], (Chaplin, Model) ->
   'use strict'
 
-  class PhotosModel extends Model
-    urlRoot:"http://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=afbc4a16eae358578189479ffae8c063&photo_id=cat&format=json&nojsoncallback=1&api_sig=65a41067f4e207282d023619e6a015a4"
+  class Photos extends Model
+    urlRoot:"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=100fdf7552196490a96bea6ae20d6096&tags=cat&format=json&nojsoncallback=1&api_sig=1ccc53d1cbea10e25098ad252502990c"
 
     defaults:
       message: 'ey!'
+
+    parse:(response)->
+      return response.photo
+

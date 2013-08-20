@@ -2,7 +2,7 @@
 var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-define(['controllers/base/controller', 'models/photos', 'views/hello-world-view'], function(Controller, Photos, HelloWorldView) {
+define(['controllers/base/controller', 'models/photos', 'models/photos-collection', 'views/photos-collection-view', 'models/base/collection'], function(Controller, Photo, PhotosCollection, PhotosCollectionView, Collection) {
   'use strict';
   var HelloController, _ref;
   return HelloController = (function(_super) {
@@ -14,20 +14,45 @@ define(['controllers/base/controller', 'models/photos', 'views/hello-world-view'
     }
 
     HelloController.prototype.show = function(params) {
-      var fetch;
-      this.model = new Photos();
-      this.view = new HelloWorldView({
-        containerMethod: 'html',
-        model: this.model,
+      /*
+      #@model = new Photos()
+      #@view = new HelloWorldView
+      #  containerMethod: 'html'
+      #  model: @model
+      #  region: 'main'
+      
+      #fetch = @model.fetch()
+      #fetch.error((e)->
+      #  #muestra los arguments del mismo fetch
+      #  console.log arguments
+      #).then((data)->
+      #  #aqui a parsear..
+      #  console.log "Wuju! exitoso!"
+      #  console.log data.stat
+      #).always(->
+      #  #sea error o no igual se ejecuta aqui una funcion
+      #  #mas info.
+      #  #http://railsadventures.wordpress.com/2012/09/02/backbone-js-models-save-always-callback/
+      #)
+      */
+
+      var _this = this;
+      this.model = new Photo;
+      this.collection = new Collection(null, {
+        model: Photo
+      });
+      this.collection.url = this.model.url();
+      this.collection.parse = function(response) {
+        return response.photos.photo;
+      };
+      this.view = new PhotosCollectionView({
+        collection: this.collection,
         region: 'main'
       });
-      fetch = this.model.fetch();
-      return fetch.error(function(e) {
-        return console.log(arguments);
-      }).then(function(data) {
-        console.log("Wuju! exitoso!");
-        return console.log(data.stat);
-      }).always(function() {});
+      return this.collection.fetch().then(function() {
+        console.log(arguments);
+        return console.log(_this.view);
+      });
     };
 
     return HelloController;
