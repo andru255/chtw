@@ -40,13 +40,26 @@ define [
       #@photos.url = @model.url()
       #@photosView = new
 
-      @model = new Photo
-      @collection = new Collection null, model: Photo
-      @collection.url = @model.url()
-      @collection.parse = (response)->
+      #@photo = new Photo
+      #@photos = new Collection null, model: Photo
+      #@photos.url = @photo.url()
+      
+      #@photosView = new PhotosCollectionView collection:@photos, region:'main'
+      #@photos.fetch().then @photosView.render
+      #console.log @photosView
+      #.then @photosView.render
+      
+      @photo = new Photo
+      
+      @photos = new Collection null, model: Photo
+      @photos.url = @photo.url()
+      @photos.parse = (response)->
+        console.log "llegas"
+        console.log response
         return response.photos.photo
 
-      @view = new PhotosCollectionView collection:@collection, region:'main'
-      @collection.fetch().then =>
+      @photosView = new PhotosCollectionView collection:@photos, region:'main'
+      
+      @photos.fetch().then =>
         console.log arguments
-        console.log @view
+        console.log @photosView
