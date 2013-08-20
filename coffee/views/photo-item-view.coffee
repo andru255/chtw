@@ -4,7 +4,6 @@ define [
 ], (View, template) ->
 
   class PhotoItemView extends View
-    template: template
     tagName: 'li'
     className: 'photo-item'
-    autoRender: true
+    template: template
