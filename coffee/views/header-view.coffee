@@ -1,6 +1,6 @@
 define [
   'views/base/view'
-  'text!templates/header.hbs'
+  'text!templates/header.html!strip'
 ], (View, template) ->
 
   class HeaderView extends View

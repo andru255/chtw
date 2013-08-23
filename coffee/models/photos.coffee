@@ -5,11 +5,7 @@ define [
   'use strict'
 
   class Photos extends Model
-    urlRoot:"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=100fdf7552196490a96bea6ae20d6096&tags=cat&format=json&nojsoncallback=1&api_sig=1ccc53d1cbea10e25098ad252502990c"
+    urlRoot:"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=8149a9878e671cb348c812cdc0f26cc2&tags=cat&format=json&nojsoncallback=1&api_sig=4aa5a9c44b82dd3f27a642d5c771d56a"
 
     defaults:
       message: 'ey!'
-
-    parse:(response)->
-      return response.photo
-

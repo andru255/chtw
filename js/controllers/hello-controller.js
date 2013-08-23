@@ -36,22 +36,26 @@ define(['controllers/base/controller', 'models/photos', 'models/photos-collectio
       #)
       */
 
+      /*
+        http://dailyjs.com/2012/12/27/backbone-tutorial-5/
+      */
+
       var _this = this;
-      this.model = new Photo;
-      this.collection = new Collection(null, {
+      this.photo = new Photo;
+      this.photos = new Collection(null, {
         model: Photo
       });
-      this.collection.url = this.model.url();
-      this.collection.parse = function(response) {
+      this.photos.url = this.photo.url();
+      this.photos.parse = function(response) {
         return response.photos.photo;
       };
-      this.view = new PhotosCollectionView({
-        collection: this.collection,
+      this.photosView = new PhotosCollectionView({
+        collection: this.photos,
         region: 'main'
       });
-      return this.collection.fetch().then(function() {
+      return this.photos.fetch().then(function() {
         console.log(arguments);
-        return console.log(_this.view);
+        return console.log(_this.photosView);
       });
     };
 
