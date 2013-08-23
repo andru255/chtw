@@ -12,4 +12,9 @@ define [
   Handlebars.registerHelper 'url', (routeName, params..., options) ->
     Chaplin.helpers.reverse routeName, params
 
-  null
+  Handlebars.registerHelper "debug", (optionalValue) ->
+    console.log "Current Context::"
+    console.log this
+    if optionalValue
+      console.log "Value::"
+      console.log optionalValue
