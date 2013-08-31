@@ -1,6 +1,6 @@
 define [
   'views/base/page-view'
-  'text!templates/home-page.hbs'
+  'text!templates/home-page.html'
 ],(PageView, template)->
 
   'use strict'

@@ -13,7 +13,7 @@ define(['chaplin', 'models/base/model'], function(Chaplin, Model) {
       return _ref;
     }
 
-    Photos.prototype.urlRoot = "http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=8149a9878e671cb348c812cdc0f26cc2&tags=cat&format=json&nojsoncallback=1&api_sig=4aa5a9c44b82dd3f27a642d5c771d56a";
+    Photos.prototype.urlRoot = "http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=13b48fc6b63cb9293e7f4f24bab019b8&tags=cat&format=json&nojsoncallback=1&api_sig=ad57f0df1f2f3ca4465f61180a7fe47d";
 
     Photos.prototype.defaults = {
       message: 'ey!'

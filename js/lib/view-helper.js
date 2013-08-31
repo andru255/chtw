@@ -8,5 +8,12 @@ define(['handlebars', 'chaplin', 'lib/utils'], function(Handlebars, Chaplin, uti
     routeName = arguments[0], params = 3 <= arguments.length ? __slice.call(arguments, 1, _i = arguments.length - 1) : (_i = 1, []), options = arguments[_i++];
     return Chaplin.helpers.reverse(routeName, params);
   });
-  return null;
+  return Handlebars.registerHelper("debug", function(optionalValue) {
+    console.log("Current Context::");
+    console.log(this);
+    if (optionalValue) {
+      console.log("Value::");
+      return console.log(optionalValue);
+    }
+  });
 });

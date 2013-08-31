@@ -12,13 +12,11 @@ define(['views/base/view', 'text!templates/photo/photo-item.html'], function(Vie
       return _ref;
     }
 
-    PhotoItemView.prototype.template = template;
-
     PhotoItemView.prototype.tagName = 'li';
 
     PhotoItemView.prototype.className = 'photo-item';
 
-    PhotoItemView.prototype.autoRender = true;
+    PhotoItemView.prototype.template = template;
 
     return PhotoItemView;
 

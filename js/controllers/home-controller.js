@@ -2,7 +2,7 @@
 var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-define(['controllers/base/controller', 'views/home-page-view'], function(Controller, HomePageView) {
+define(['config', 'chaplin', 'controllers/base/controller', 'models/base/collection', 'models/photo', 'views/photo-page-view'], function(Config, Chaplin, Controller, Collection, Photo, PhotoPageView) {
   'use strict';
   var HomeController, _ref;
   return HomeController = (function(_super) {
@@ -14,7 +14,15 @@ define(['controllers/base/controller', 'views/home-page-view'], function(Control
     }
 
     HomeController.prototype.show = function(params) {
-      return this.view = new HomePageView;
+      return console.log('show');
+    };
+
+    HomeController.prototype.photo = function(params) {
+      console.log(params);
+      console.info(Chaplin.mediator.photosView);
+      return this.photoDetailView = new PhotoPageView({
+        region: 'rightSide'
+      });
     };
 
     return HomeController;

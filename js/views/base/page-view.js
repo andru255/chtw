@@ -18,6 +18,11 @@ define(['views/base/view'], function(View) {
       return {};
     };
 
+    PageView.prototype.render = function() {
+      PageView.__super__.render.apply(this, arguments);
+      return this.publishEvent('navigation:change', this.getNavigationData());
+    };
+
     return PageView;
 
   })(View);

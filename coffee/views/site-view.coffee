@@ -9,5 +9,7 @@ define [
     id: 'site-container'
     regions:
       main: '#content-container'
+      leftSide: '#leftside'
+      rightSide: '#rightside'
     template: template
     template = null

@@ -2,7 +2,7 @@
 var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-define(['controllers/base/controller', 'models/photos', 'models/photos-collection', 'views/photos-collection-view', 'models/base/collection'], function(Controller, Photo, PhotosCollection, PhotosCollectionView, Collection) {
+define(['config', 'controllers/base/controller', 'models/photo', 'views/photos-collection-view', 'models/base/collection'], function(Config, Controller, Photo, PhotosCollectionView, Collection) {
   'use strict';
   var HelloController, _ref;
   return HelloController = (function(_super) {
@@ -41,11 +41,10 @@ define(['controllers/base/controller', 'models/photos', 'models/photos-collectio
       */
 
       var _this = this;
-      this.photo = new Photo;
       this.photos = new Collection(null, {
         model: Photo
       });
-      this.photos.url = this.photo.url();
+      this.photos.url = Config.urlList;
       this.photos.parse = function(response) {
         return response.photos.photo;
       };
@@ -57,6 +56,10 @@ define(['controllers/base/controller', 'models/photos', 'models/photos-collectio
         console.log(arguments);
         return console.log(_this.photosView);
       });
+    };
+
+    HelloController.prototype.photo = function(params) {
+      return console.log(params);
     };
 
     return HelloController;

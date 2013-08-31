@@ -1,15 +1,16 @@
 define [
+  'config'
   'controllers/base/controller'
-  'models/photos'
-  'models/photos-collection'
+  'models/photo'
   'views/photos-collection-view'
   'models/base/collection'
-], (Controller, Photo, PhotosCollection, PhotosCollectionView, Collection) ->
+], (Config, Controller, Photo, PhotosCollectionView, Collection) ->
   'use strict'
 
   class HelloController extends Controller
 
     show: (params) ->
+
       ###
       #@model = new Photos()
       #@view = new HelloWorldView
@@ -34,7 +35,6 @@ define [
 
       ###
         http://dailyjs.com/2012/12/27/backbone-tutorial-5/
-
       ###
       #@photos = new Collection null, model: Photo
       #@photos.url = @model.url()
@@ -43,23 +43,21 @@ define [
       #@photo = new Photo
       #@photos = new Collection null, model: Photo
       #@photos.url = @photo.url()
-      
+
       #@photosView = new PhotosCollectionView collection:@photos, region:'main'
       #@photos.fetch().then @photosView.render
       #console.log @photosView
       #.then @photosView.render
-      
-      @photo = new Photo
-      
       @photos = new Collection null, model: Photo
-      @photos.url = @photo.url()
+      @photos.url = Config.urlList
       @photos.parse = (response)->
-        console.log "llegas"
-        console.log response
-        return response.photos.photo
+        response.photos.photo
 
       @photosView = new PhotosCollectionView collection:@photos, region:'main'
-      
+
       @photos.fetch().then =>
         console.log arguments
         console.log @photosView
+
+    photo:(params)->
+      console.log params

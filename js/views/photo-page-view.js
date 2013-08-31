@@ -2,7 +2,7 @@
 var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-define(['views/base/view', 'text!templates/photo/photo-page.hbs'], function(View, template) {
+define(['views/base/view', 'text!templates/photo/photo-page.html'], function(View, template) {
   var PhotoPageView, _ref;
   return PhotoPageView = (function(_super) {
     __extends(PhotoPageView, _super);
@@ -12,28 +12,11 @@ define(['views/base/view', 'text!templates/photo/photo-page.hbs'], function(View
       return _ref;
     }
 
+    PhotoPageView.prototype.autoRender = true;
+
     PhotoPageView.prototype.template = template;
 
-    PhotoPageView.prototype.container = '#photo-container';
-
-    PhotoPageView.prototype.autorender = true;
-
-    PhotoPageView.prototype.events = {
-      'click #detalle': 'verDetalle'
-    };
-
-    PhotoPageView.prototype.listen = {
-      'change model': 'render'
-    };
-
-    PhotoPageView.prototype.render = function() {
-      this.publishEvent('!adjustHeaderTitle', this.model.get('name') || 'Photos');
-      return PhotoPageView.__super__.render.apply(this, arguments);
-    };
-
-    PhotoPageView.prototype.verDetalle = function() {
-      return console.log('ver detalle..');
-    };
+    template = null;
 
     return PhotoPageView;
 

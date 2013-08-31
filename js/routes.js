@@ -2,6 +2,11 @@
 define(function() {
   'use strict';
   return function(match) {
-    return match('', 'hello#show');
+    match('', 'home#show');
+    return match('photo/:id', 'home#photo', {
+      constraints: {
+        id: /^[0-9]*$/
+      }
+    });
   };
 });

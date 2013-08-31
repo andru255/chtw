@@ -1,8 +1,12 @@
 define [
-    'chaplin',
-    'views/site-view',
+    'config'
+    'chaplin'
+    'views/site-view'
     'views/header-view'
-  ], (Chaplin, SiteView, HeaderView) ->
+    'models/base/collection'
+    'models/photo'
+    'views/photos-collection-view'
+  ], (Config, Chaplin, SiteView, HeaderView, Collection, Photo, PhotosCollectionView) ->
     'use strict'
 
     class Controller extends Chaplin.Controller
@@ -10,13 +14,17 @@ define [
       beforeAction:(params, route)->
         @compose 'site', SiteView
         @compose 'header', HeaderView
-      #  @compose 'auth', ->
-      #    SessionController = require 'Controllers/session-controller'
-      #    @controller = new SessionController
 
-      ###
-      if route.name in ['users#show', 'repos#show', 'topics#show']
+        #List of photos
         @compose 'navigation', ->
-        @model = new Navigation
-        @view = new NavigationView {@model}
-      ###
+          @photos = new Collection null, model: Photo
+          @photos.url = Config.urlList
+          @photos.parse = (response)->
+            response.photos.photo
+
+          @photosView = new PhotosCollectionView collection:@photos, region:'leftSide'
+
+          @photos.fetch().then =>
+            console.log arguments
+            console.log @photosView
+

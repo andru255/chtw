@@ -4,7 +4,8 @@ define ->
   # The routes for the application. This module returns a function.
   # `match` is match method of the Router
   (match) ->
-    match '', 'hello#show'
+    match '', 'home#show'
+    match 'photo/:id', 'home#photo', constraints: {id: /^[0-9]*$/}
     #match 'logout', 'auth#logout'
     #match 'feed', 'feed#show'
     #match 'settings', 'settings#show'

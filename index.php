@@ -1,4 +1,4 @@
-<?php 
+<?php
  header('Access-Control-Allow-Origin: *');
 ?>
 <!DOCTYPE html>
@@ -6,15 +6,17 @@
 <head>
   <?php $host = "http://local.st.chtw.pe/"; ?>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="<?php echo $host;?>css/style.css" />
+
   <title><?php echo $host;?></title>
   <style>body { font-family: sans-serif; }</style>
 
-  <script src="<?php echo $host;?>bower_components/requirejs/require.js"></script>
+  <script src="<?php echo $host;?>js/bower_components/requirejs/require.js"></script>
   <script>
   // Configure the AMD module loader
   requirejs.config({
     // The path where your JavaScripts are located
-    baseUrl: '<?php echo $host?>',
+    baseUrl: '<?php echo $host?>js/',
     // Specify the paths of vendor libraries
     paths: {
       jquery: 'bower_components/jquery/jquery',
