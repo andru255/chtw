@@ -18,13 +18,20 @@ define [
         #List of photos
         @compose 'navigation', ->
           @photos = new Collection null, model: Photo
-          @photos.url = Config.urlList
+
+          @photos.url = if Config.methodList is 'YQL' then Config.urlListYQL() else Config.urlList
+
           @photos.parse = (response)->
-            response.photos.photo
 
-          @photosView = new PhotosCollectionView collection:@photos, region:'leftSide'
+            if Config.methodList == 'YQL'
+              response.query.results.photo
+            else
+              response.photos.photo
 
-          @photos.fetch().then =>
-            console.log arguments
-            console.log @photosView
+          @photosView = new PhotosCollectionView
+            collection:@photos
+            region:'leftSide'
+
+          @photos.fetch()
+
 

@@ -1,7 +1,11 @@
 div {
     border: 1px solid #000;
 }
-#leftside {
+#content-container div{
   border-color: #ddd;
+  display:block;
+}
+#leftside {
   width: 260px;
+  float:left;
 }

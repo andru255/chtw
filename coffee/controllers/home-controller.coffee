@@ -4,8 +4,10 @@ define [
   'controllers/base/controller'
   'models/base/collection'
   'models/photo'
+  'models/photo-detail'
+  'models/photo-comment'
   'views/photo-page-view'
-  ], (Config, Chaplin, Controller, Collection, Photo, PhotoPageView)->
+  ], (Config, Chaplin, Controller, Collection, Photo, PhotoDetail, PhotoComment, PhotoPageView)->
   'use strict'
 
   class HomeController extends Controller
@@ -14,8 +16,17 @@ define [
 
     photo:(params)->
       console.log params
+      id = params.id
+      if id
+        photoDetail = new Photo
+          urlRoot: Config.detailPhoto(id)
 
-      console.info Chaplin.mediator.photosView
+        photoComments = new Collection null, PhotoComment
+        photoComments.url = Config.urlComments(id)
 
-      @photoDetailView = new PhotoPageView
-        region: 'rightSide'
+        @photoDetailView = new PhotoPageView
+          collection: photoComments
+          region: 'rightSide'
+
+        photoComments.fetch().then =>
+          console.log @photoDetailView

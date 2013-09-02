@@ -15,6 +15,11 @@ define(['chaplin'], function(Chaplin) {
 
     Application.prototype.title = 'Chaplin example application';
 
+    Application.prototype.initMediator = function() {
+      Chaplin.mediator.photos = null;
+      return Application.__super__.initMediator.apply(this, arguments);
+    };
+
     return Application;
 
   })(Chaplin.Application);

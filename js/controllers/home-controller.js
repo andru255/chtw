@@ -2,7 +2,7 @@
 var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-define(['config', 'chaplin', 'controllers/base/controller', 'models/base/collection', 'models/photo', 'views/photo-page-view'], function(Config, Chaplin, Controller, Collection, Photo, PhotoPageView) {
+define(['config', 'chaplin', 'controllers/base/controller', 'models/base/collection', 'models/photo', 'models/photo-detail', 'models/photo-comment', 'views/photo-page-view'], function(Config, Chaplin, Controller, Collection, Photo, PhotoDetail, PhotoComment, PhotoPageView) {
   'use strict';
   var HomeController, _ref;
   return HomeController = (function(_super) {
@@ -18,11 +18,24 @@ define(['config', 'chaplin', 'controllers/base/controller', 'models/base/collect
     };
 
     HomeController.prototype.photo = function(params) {
+      var id, photoComments, photoDetail,
+        _this = this;
       console.log(params);
-      console.info(Chaplin.mediator.photosView);
-      return this.photoDetailView = new PhotoPageView({
-        region: 'rightSide'
-      });
+      id = params.id;
+      if (id) {
+        photoDetail = new Photo({
+          urlRoot: Config.detailPhoto(id)
+        });
+        photoComments = new Collection(null, PhotoComment);
+        photoComments.url = Config.urlComments(id);
+        this.photoDetailView = new PhotoPageView({
+          collection: photoComments,
+          region: 'rightSide'
+        });
+        return photoComments.fetch().then(function() {
+          return console.log(_this.photoDetailView);
+        });
+      }
     };
 
     return HomeController;

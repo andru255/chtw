@@ -17,22 +17,22 @@ define(['config', 'chaplin', 'views/site-view', 'views/header-view', 'models/bas
       this.compose('site', SiteView);
       this.compose('header', HeaderView);
       return this.compose('navigation', function() {
-        var _this = this;
         this.photos = new Collection(null, {
           model: Photo
         });
-        this.photos.url = Config.urlList;
+        this.photos.url = Config.methodList === 'YQL' ? Config.urlListYQL() : Config.urlList;
         this.photos.parse = function(response) {
-          return response.photos.photo;
+          if (Config.methodList === 'YQL') {
+            return response.query.results.photo;
+          } else {
+            return response.photos.photo;
+          }
         };
         this.photosView = new PhotosCollectionView({
           collection: this.photos,
           region: 'leftSide'
         });
-        return this.photos.fetch().then(function() {
-          console.log(arguments);
-          return console.log(_this.photosView);
-        });
+        return this.photos.fetch();
       });
     };
 

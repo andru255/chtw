@@ -2,8 +2,18 @@
 define(function() {
   var Config;
   return Config = {
+    methodList: 'YQL',
+    tagYQL: "Freddie Mercury",
+    urlListYQL: function() {
+      return "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20flickr.photos.info%20where%20api_key%3D%2200e7c797ab6d610f68170bdf33d06e2a%22%20and%20photo_id%20in%20(select%20id%20from%20flickr.photos.search%20where%20tags%3D%22" + this.tagYQL + "%22%20and%20api_key%3D%2200e7c797ab6d610f68170bdf33d06e2a%22)&format=json&diagnostics=true&callback=";
+    },
     urlList: "http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=51a3ea97719fa4df3c5a6d44e9bf7bb1&tags=cat&format=json&nojsoncallback=1",
     token: "00e7c797ab6d610f68170bdf33d06e2a",
-    urlDetail: function(id) {}
+    detailPhoto: function(id) {
+      return "http://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=5e513fce488b297edec20b8d39833888&photo_id=" + id + "&secret=" + Config.token + "&format=json&nojsoncallback=1";
+    },
+    urlComments: function(id) {
+      return "http://api.flickr.com/services/rest/?method=flickr.photos.comments.getList&api_key=5e513fce488b297edec20b8d39833888&photo_id=" + id + "&format=json&nojsoncallback=1";
+    }
   };
 });
